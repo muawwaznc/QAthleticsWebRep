@@ -78,7 +78,7 @@ $(document).ready(function() {
   $(function(){
     jQuery(document).ready(function() {
     $('#home').backstretch([
-       "../images/home-bg-slider-img1.jpg", 
+       "../images/home-bg-slider-img1.jpg",
        "../images/home-bg-slider-img2.jpg",
         ],  {duration: 2000, fade: 750});
     });
