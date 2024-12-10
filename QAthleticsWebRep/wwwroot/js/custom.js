@@ -90,17 +90,29 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     const homeElement = document.querySelector('#home');
+
     if (homeElement) {
         let currentIndex = 0;
+
         const changeBackground = () => {
-            homeElement.style.transition = 'background-image 0.75s ease';
-            homeElement.style.backgroundImage = `url(${backstretchImages[currentIndex]})`;
-            console.log(`url(${backstretchImages[currentIndex]})`);
-            currentIndex = (currentIndex + 1) % backstretchImages.length;
+            // Preload the image
+            const img = new Image();
+            img.src = backstretchImages[currentIndex];
+
+            img.onload = () => {
+                // Apply only the background-image
+                //homeElement.style.backgroundImage = `url(${img.src})`;
+                console.log(`Background updated to: ${img.src}`);
+                currentIndex = (currentIndex + 1) % backstretchImages.length;
+            };
+
+            img.onerror = () => {
+                console.error(`Failed to load image: ${img.src}`);
+            };
         };
 
         changeBackground();
-        setInterval(changeBackground, 2000);
+        setInterval(changeBackground, 2000); // Change every 2 seconds
     }
 
     /* Owl Carousel */
@@ -139,3 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+function scrollToSection(sectionId) {
+    const element = document.querySelector(sectionId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}

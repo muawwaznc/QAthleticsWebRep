@@ -6,14 +6,16 @@
 <!-- =========================
 	HOME SECTION
 ============================== -->
-<section id="home" class="parallax-section">
+<section id="home" style="background-image: url(@currentBackground);" class="parallax-section">
 	<div class="container">
 		<div class="row">
 
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
 				<h3 class="wow bounceIn" data-wow-delay="0.9s">Hello! you are welcome to</h3>
 				<h1 class="wow fadeInUp" data-wow-delay="1.6s">Professional<br>Fitness Club</h1>
-				<a href="#siginin" class="wow fadeInUp smoothScroll btn btn-default" data-wow-delay="2s">SIGN IN</a>
+				<button class="wow fadeInUp smoothScroll btn btn-default" data-wow-delay="2s" @onclick="@(async() => await ScrollToSigninSection())">
+					SIGN IN
+				</button>
 			</div>
 
 		</div>
