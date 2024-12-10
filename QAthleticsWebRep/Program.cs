@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using QAthleticsWebRep.Services.IServices;
+using QAthleticsWebRep.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

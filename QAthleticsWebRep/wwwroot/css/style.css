@@ -386,9 +386,6 @@ a {
 }
 
     #siginin .newsletter_detail {
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
         padding-top: 3rem;
     }
 
@@ -413,7 +410,7 @@ a {
 
         #siginin input[type="submit"] {
             background: #26253a;
-            border: none;
+            border: 1px white solid;
             color: #ffffff;
             font-size: 20px;
             font-weight: bold;
