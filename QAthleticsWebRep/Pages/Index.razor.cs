@@ -14,13 +14,7 @@ namespace QAthleticsWebRep.Pages
 
         #region Load Initals
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await JsRuntime.InvokeVoidAsync("scrollToLoginForm");
-            }
-        }
+        
 
 
 

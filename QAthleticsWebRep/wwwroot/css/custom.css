@@ -22,7 +22,7 @@ html, body {
 }
 
 .section-hero {
-    background-image: url('images/forestbridge.jpg');
+    background-image: url('../images/forestbridge.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
