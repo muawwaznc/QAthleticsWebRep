@@ -12,11 +12,24 @@ namespace QAthleticsWebRep.Pages
 
         #endregion
 
-        #region Load Initals
+        #region Properties
 
-        
+        protected string Email { get; set; }
+        protected string Password { get; set; }
+
+        #endregion
+
+        #region Load Initials
 
 
+        #endregion
+
+        #region Login Function
+
+        protected async Task Signin()
+        {
+
+        }
 
         #endregion
     }
