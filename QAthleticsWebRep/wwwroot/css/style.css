@@ -36,7 +36,7 @@ h2 {
 }
 
 #trainer h2,
-#newsletter h2,
+#siginin h2,
 #blog h2,
 #price h2 {
     padding-bottom: 2px;
@@ -82,7 +82,7 @@ a {
 
 #home,
 #trainer,
-#newsletter,
+#siginin,
 #price,
 #testimonial,
 #blog-header {
@@ -375,20 +375,24 @@ a {
 /*---------------------------------------
    Newsletter section              
 -----------------------------------------*/
-#newsletter {
+#siginin {
     background: url('../images/newsletter-bg.jpg') 50% 0 repeat-y fixed;
     background-size: cover;
     background-position: center center;
     color: #ffffff;
     padding-top: 12rem;
     padding-bottom: 12rem;
+    height: 100vh;
 }
 
-    #newsletter .newsletter_detail {
+    #siginin .newsletter_detail {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
         padding-top: 3rem;
     }
 
-    #newsletter .form-control {
+    #siginin .form-control {
         background: transparent;
         border: none;
         border-bottom: 1px solid #999;
@@ -399,15 +403,15 @@ a {
         transition: all 0.4s ease-in-out;
     }
 
-        #newsletter .form-control:focus {
+        #siginin .form-control:focus {
             border-bottom-color: #ffffff;
         }
 
-    #newsletter input {
+    #siginin input {
         height: 45px;
     }
 
-        #newsletter input[type="submit"] {
+        #siginin input[type="submit"] {
             background: #26253a;
             border: none;
             color: #ffffff;
@@ -419,7 +423,7 @@ a {
             transition: all 0.4s ease-in-out;
         }
 
-            #newsletter input[type="submit"]:hover {
+            #siginin input[type="submit"]:hover {
                 background: #ffffff;
                 color: #26253a;
             }
