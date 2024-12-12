@@ -27,27 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    /* Navigation stays visible on scroll */
-    function mainNav() {
-        const stickyNav = document.querySelector('.sticky-navigation');
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-        // Remove this part of code if you want the navbar to always stay at the top
-        if (stickyNav) {
-            if (scrollTop > 40) {
-                stickyNav.style.transition = 'opacity 0.5s, top 0.5s';
-                stickyNav.style.opacity = '1';
-                stickyNav.style.top = '0';
-            } else {
-                stickyNav.style.opacity = '0';
-                stickyNav.style.top = '-75px';
-            }
-        }
-    }
-
-    window.addEventListener('scroll', mainNav);
-    mainNav();
-
     /* Hide mobile menu after clicking a link */
     const navbarLinks = document.querySelectorAll('.navbar-collapse a');
     const navbarCollapse = document.querySelector('.navbar-collapse');
