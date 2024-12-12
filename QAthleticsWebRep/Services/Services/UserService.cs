@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QAthleticsWebRep.DatabaseContext;
 using QAthleticsWebRep.Services.IServices;
+using QAthleticsWebRep.ViewModel;
 
 namespace QAthleticsWebRep.Services.Services
 {
@@ -15,11 +16,17 @@ namespace QAthleticsWebRep.Services.Services
             }
         }
 
-        public async Task<List<Tluchampion>> GetChampionsList()
+        public async Task<List<ChampionViewModel>> GetChampionsList()
         {
             using (var db = new QAthleticsWebRepContext())
             {
-                var champions = await db.Tluchampions.Where(x => x.ChampStatus == "1").ToListAsync();
+                var champions = await db.Tluchampions.Where(x => x.ChampStatus == "1").Select(x => new ChampionViewModel
+                {
+                    Name = x.Descr1,
+                    Address = x.Caddress,
+                    StartDate = x.StartDate.HasValue ? DateOnly.FromDateTime(x.StartDate.Value).ToString("dd/MM/yyyy") : null,
+                    EndDate = x.EndDate.HasValue ? DateOnly.FromDateTime(x.EndDate.Value).ToString("dd/MM/yyyy") : null
+                }).ToListAsync();
                 return champions;
             }
         }

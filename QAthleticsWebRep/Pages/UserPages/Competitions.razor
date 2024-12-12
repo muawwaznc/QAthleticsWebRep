@@ -38,6 +38,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Image</th>
                                     <th>Address</th>
                                     <th>Start Date</th>
                                     <th>EndDate</th>
@@ -47,8 +48,9 @@
                                 @foreach (var champion in ChampionsList)
                                 {
                                     <tr>
-                                        <td>@champion.Descr1</td>
-                                        <td>@champion.Caddress</td>
+                                        <td>@champion.Name</td>
+                                        <td>@champion.Image</td>
+                                        <td>@champion.Address</td>
                                         <td>@champion.StartDate</td>
                                         <td>@champion.EndDate</td>
                                     </tr>

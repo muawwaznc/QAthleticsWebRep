@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using QAthleticsWebRep.DatabaseContext;
 using QAthleticsWebRep.Services.IServices;
+using QAthleticsWebRep.ViewModel;
 
 namespace QAthleticsWebRep.Pages.UserPages
 {
@@ -18,7 +19,7 @@ namespace QAthleticsWebRep.Pages.UserPages
 
         #region Properties
 
-        protected List<Tluchampion> ChampionsList { get; set; } = new();
+        protected List<ChampionViewModel> ChampionsList { get; set; } = new();
 
         #endregion
 

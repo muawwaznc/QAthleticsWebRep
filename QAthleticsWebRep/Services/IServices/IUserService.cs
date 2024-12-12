@@ -1,4 +1,5 @@
 ﻿using QAthleticsWebRep.DatabaseContext;
+using QAthleticsWebRep.ViewModel;
 
 namespace QAthleticsWebRep.Services.IServices
 {
@@ -6,6 +7,6 @@ namespace QAthleticsWebRep.Services.IServices
     {
         Task<Tuser> GetUserByEmailAndPassword(string userId, string password);
 
-        Task<List<Tluchampion>> GetChampionsList();
+        Task<List<ChampionViewModel>> GetChampionsList();
     }
 }
