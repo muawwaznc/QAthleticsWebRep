@@ -33,6 +33,8 @@ namespace QAthleticsWebRep.Pages
         protected string UserId { get; set; }
         protected string Password { get; set; }
 
+        protected string ErrorString { get; set; }
+
         #endregion
 
         #region Load Initials
@@ -63,17 +65,26 @@ namespace QAthleticsWebRep.Pages
 
         protected async Task Signin()
         {
-            var user = UserService.GetUserByEmailAndPassword(UserId, Password);
-            if(user != null)
+            ErrorString = "";
+            try
             {
-                await ProtectedSessionStore.SetAsync("UserId", UserId);
-                var userId = (await ProtectedSessionStore.GetAsync<string>("UserId")).Value;
-                NavigationManager.NavigateTo("/Competitions");
+                var user = await UserService.GetUserByEmailAndPassword(UserId, Password);
+                if (user != null)
+                {
+                    await ProtectedSessionStore.SetAsync("UserId", UserId);
+                    var userId = (await ProtectedSessionStore.GetAsync<string>("UserId")).Value;
+                    NavigationManager.NavigateTo("/Competitions");
+                }
+                else
+                {
+                    ErrorString = "Invalid User ID or Password...";
+                }
             }
-            else
+            catch(Exception)
             {
-                //Show error
+                ErrorString = "Something went wrong, please try again later.";
             }
+            
         }
 
         private async Task ScrollToSigninSection()
