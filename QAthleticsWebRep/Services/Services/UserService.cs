@@ -14,5 +14,14 @@ namespace QAthleticsWebRep.Services.Services
                 return user;
             }
         }
+
+        public async Task<List<Tluchampion>> GetChampionsList()
+        {
+            using (var db = new QAthleticsWebRepContext())
+            {
+                var champions = await db.Tluchampions.Where(x => x.ChampStatus == "1").ToListAsync();
+                return champions;
+            }
+        }
     }
 }

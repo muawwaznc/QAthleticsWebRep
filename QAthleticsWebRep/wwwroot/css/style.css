@@ -373,7 +373,7 @@ a {
 
 
 /*---------------------------------------
-   Newsletter section              
+   Signin section              
 -----------------------------------------*/
 #siginin {
     background: url('../images/newsletter-bg.jpg') 50% 0 repeat-y fixed;
@@ -425,6 +425,38 @@ a {
                 color: #26253a;
             }
 
+
+/*---------------------------------------
+   Table section              
+-----------------------------------------*/
+#tableSection {
+    background: url('../images/newsletter-bg.jpg') 50% 0 repeat-y fixed;
+    background-size: cover;
+    background-position: center center;
+    color: #ffffff;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    height: 100vh;
+}
+
+    #tableSection .tableSection_detail {
+        padding-top: 3rem;
+    }
+
+.table {
+    background: white;
+    border: 1px solid black;
+    color: #26253a;
+}
+
+thead, th {
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    background-color: #26253a;
+    color: white;
+    z-index: 1;
+}
 
 
 /*---------------------------------------
