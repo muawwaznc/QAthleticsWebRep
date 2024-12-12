@@ -2,5 +2,6 @@
 {
     public interface IFileManager
     {
+        string GetImageUrl(string imagePath);
     }
 }

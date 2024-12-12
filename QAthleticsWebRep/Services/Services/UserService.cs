@@ -7,6 +7,12 @@ namespace QAthleticsWebRep.Services.Services
 {
     public class UserService: IUserService
     {
+        private readonly IFileManager _fileManager;
+        public UserService(IFileManager fileManager) 
+        {
+            _fileManager = fileManager;
+        }
+
         public async Task<Tuser> GetUserByEmailAndPassword(string userId, string password)
         {
             using (var db = new QAthleticsWebRepContext())
@@ -23,6 +29,7 @@ namespace QAthleticsWebRep.Services.Services
                 var champions = await db.Tluchampions.Where(x => x.ChampStatus == "1").Select(x => new ChampionViewModel
                 {
                     Name = x.Descr1,
+                    Image = _fileManager.GetImageUrl($"CompetitionPhotos/ChampionshipPhotos/{x.No1}.jpg"),
                     Address = x.Caddress,
                     StartDate = x.StartDate.HasValue ? DateOnly.FromDateTime(x.StartDate.Value).ToString("dd/MM/yyyy") : null,
                     EndDate = x.EndDate.HasValue ? DateOnly.FromDateTime(x.EndDate.Value).ToString("dd/MM/yyyy") : null
