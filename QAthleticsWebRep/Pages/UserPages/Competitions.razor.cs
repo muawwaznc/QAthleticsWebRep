@@ -42,5 +42,15 @@ namespace QAthleticsWebRep.Pages.UserPages
         }
 
         #endregion
+
+        #region Navigation Function
+
+        protected async Task Logout()
+        {
+            await ProtectedSessionStore.DeleteAsync("UserId");
+            NavigationManager.NavigateTo("/");
+        }
+
+        #endregion
     }
 }

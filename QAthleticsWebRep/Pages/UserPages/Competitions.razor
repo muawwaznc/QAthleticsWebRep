@@ -2,6 +2,33 @@
 
 <PageTitle>Q Athletics | Competitions</PageTitle>
 
+<!-- =========================
+    NAVIGATION SECTION
+============================== -->
+<div class="navbar navbar-default navbar-fixed-top sticky-navigation" role="navigation">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon icon-bar"></span>
+                <span class="icon icon-bar"></span>
+                <span class="icon icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Q-Athletics</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right main-navigation">
+                <li><a href="/Competitions" class="smoothScroll">Competitions</a></li>
+                <li><a href="#" class="smoothScroll">Comming Soon</a></li>
+                <li><a href="#" class="smoothScroll">Comming Soon</a></li>
+                <li><a href="#" @onclick="@(async() => await Logout())" class="smoothScroll">Log out</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
 <section id="tableSection" class="parallax-section">
     <div class="container">
         <div class="row">
