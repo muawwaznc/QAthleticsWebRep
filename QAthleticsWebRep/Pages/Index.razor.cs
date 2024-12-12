@@ -15,6 +15,7 @@ namespace QAthleticsWebRep.Pages
         [Inject] protected IJSRuntime JsRuntime { get; set; }
         [Inject] protected IUserService UserService { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject] IFileManager FileManager { get; set; }
 
         #endregion
 
@@ -22,12 +23,13 @@ namespace QAthleticsWebRep.Pages
 
         private string[] backstretchImages = new[]
         {
-            "images/home-bg-slider-img1.jpg",
-            "images/home-bg-slider-img2.jpg"
+            "",
+            ""
         };
 
-        protected string currentBackground { get; set; } = "images/home-bg-slider-img1.jpg";
-        private int currentIndex = 0;
+        protected string CurrentBackground { get; set; } = "";
+		protected string SigninBackground { get; set; } = "";
+		private int currentIndex = 0;
         private System.Timers.Timer timer;
 
         protected string UserId { get; set; }
@@ -41,6 +43,10 @@ namespace QAthleticsWebRep.Pages
 
         protected override async Task OnInitializedAsync()
         {
+			SigninBackground = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
+			CurrentBackground = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
+            backstretchImages[0] = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
+            backstretchImages[1] = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
             await Task.Run(() =>
             {
                 StartTimer();
@@ -106,7 +112,7 @@ namespace QAthleticsWebRep.Pages
         private void ChangeBackground(object sender, ElapsedEventArgs e)
         {
             currentIndex = (currentIndex + 1) % backstretchImages.Length;
-            currentBackground = backstretchImages[currentIndex];
+            CurrentBackground = backstretchImages[currentIndex];
 
             InvokeAsync(StateHasChanged);
         }

@@ -154,6 +154,17 @@ a {
 /*---------------------------------------
     Navigation section              
 -----------------------------------------*/
+
+.navbar-default {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-bottom: 2px solid #f9f9f9;
+}
+
 .navbar-default {
     background: #ffffff;
     border-bottom: 2px solid #f9f9f9;
@@ -165,7 +176,7 @@ a {
         color: #505050;
         font-size: 36px;
         font-weight: bold;
-        line-height: 50px;
+        line-height: 20px;
         margin: 0;
     }
 
@@ -173,7 +184,7 @@ a {
         color: #999;
         font-size: 24px;
         font-weight: 300;
-        line-height: 60px;
+        line-height: 20px;
         letter-spacing: 0.6px;
         transition: all 0.4s ease-in-out;
         -webkit-transition: all 0.4s ease-in-out;
@@ -376,13 +387,15 @@ a {
    Signin section              
 -----------------------------------------*/
 #siginin {
-    background: url('../images/newsletter-bg.jpg') 50% 0 repeat-y fixed;
+    position: relative;
+    background: 50% 0 repeat-y fixed;
     background-size: cover;
     background-position: center center;
     color: #ffffff;
     padding-top: 12rem;
     padding-bottom: 12rem;
     height: 100vh;
+    z-index: 0;
 }
 
     #siginin .newsletter_detail {

@@ -27,11 +27,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    /* Navigation visible on Scroll */
+    /* Navigation stays visible on scroll */
     function mainNav() {
         const stickyNav = document.querySelector('.sticky-navigation');
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
+        // Remove this part of code if you want the navbar to always stay at the top
         if (stickyNav) {
             if (scrollTop > 40) {
                 stickyNav.style.transition = 'opacity 0.5s, top 0.5s';
