@@ -9,7 +9,7 @@ namespace QAthleticsWebRep.Services.Services
 
         public string GetImageUrl(string imagePath)
         {
-            return $"{baseUrl}/{imagePath}?{sasToken}";
-        }
+			return $"{baseUrl}/{imagePath}?{sasToken}&cacheBust={DateTime.UtcNow.Ticks}";
+		}
     }
 }
