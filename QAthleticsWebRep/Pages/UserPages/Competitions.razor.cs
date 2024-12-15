@@ -28,6 +28,9 @@ namespace QAthleticsWebRep.Pages.UserPages
         protected List<string?> ClassFilterList { get; set; } = new();
         protected List<string?> RaceMeasureFilterList { get; set; } = new();
         protected List<string?> GameDateFilterList { get; set; } = new();
+        protected string? SelectedClassFilter { get; set; } = "All";
+        protected string? SelectedRaceMeasureFilter { get; set; } = "All";
+        protected string? SelectedGameDateFilter { get; set; } = "All";
 
         #endregion
 
@@ -82,35 +85,46 @@ namespace QAthleticsWebRep.Pages.UserPages
 
         protected void OnGameDateFilterChange(ChangeEventArgs e)
         {
-            var selectedGameDateFilter = e.Value?.ToString();
-            if(selectedGameDateFilter == "All")
-            {
-                FilteredEventsList = EventsList;
-                return;
-            }
-            FilteredEventsList = EventsList.Where(x => x.GameDate == selectedGameDateFilter).ToList();
+            SelectedGameDateFilter = e.Value?.ToString();
+            OnFilterChange();
         }
 
         protected void OnRaceMeasureFilterChange(ChangeEventArgs e)
         {
-            var selectedRaceMeasureFilter = e.Value?.ToString();
-            if (selectedRaceMeasureFilter == "All")
-            {
-                FilteredEventsList = EventsList;
-                return;
-            }
-            FilteredEventsList = EventsList.Where(x => x.RaceMeasure == selectedRaceMeasureFilter).ToList();
+            SelectedRaceMeasureFilter = e.Value?.ToString();
+            OnFilterChange();
         }
 
         protected void OnClassFilterChange(ChangeEventArgs e)
         {
-            var selectedClassFilter = e.Value?.ToString();
-            if (selectedClassFilter == "All")
+            SelectedClassFilter = e.Value?.ToString();
+            OnFilterChange();
+        }
+
+        private void OnFilterChange()
+        {
+            FilteredEventsList = EventsList;
+
+            if (SelectedClassFilter != "All")
             {
-                FilteredEventsList = EventsList;
-                return;
+                FilteredEventsList = FilteredEventsList
+                    .Where(x => x.Class == SelectedClassFilter)
+                    .ToList();
             }
-            FilteredEventsList = EventsList.Where(x => x.Class == selectedClassFilter).ToList();
+
+            if (SelectedRaceMeasureFilter != "All")
+            {
+                FilteredEventsList = FilteredEventsList
+                    .Where(x => x.RaceMeasure == SelectedRaceMeasureFilter)
+                    .ToList();
+            }
+
+            if (SelectedGameDateFilter != "All")
+            {
+                FilteredEventsList = FilteredEventsList
+                    .Where(x => x.GameDate == SelectedGameDateFilter)
+                    .ToList();
+            }
         }
 
         #endregion
