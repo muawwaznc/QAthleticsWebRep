@@ -78,19 +78,17 @@
 
             <!-- Second Line: Competition Picture, Empty Space, and Filters -->
             <div class="dialog-content">
-                <!-- Competition Picture -->
+                
                 <div>
                     <img src="@SelectedChampionForDialogBox.Image" alt="Competition Picture">
                 </div>
 
-                <!-- Empty Space -->
                 <div style="flex: 1;"></div>
 
-                <!-- Filters -->
                 <div class="dialog-filters">
-                    @if(ClassFilterList.Count > 1)
+                    @if (ClassFilterList.Count > 1)
                     {
-                        <div>
+                        <div class="filter-item">
                             <label for="classFilter">Filter by Class:</label>
                             <select id="classFilter">
                                 <option selected>Choose a class...</option>
@@ -104,7 +102,7 @@
 
                     @if (RaceMeasureFilterList.Count > 1)
                     {
-                        <div>
+                        <div class="filter-item">
                             <label for="raceMeasureFilter">Filter by Race Measure:</label>
                             <select id="raceMeasureFilter">
                                 <option selected>All</option>
@@ -118,7 +116,7 @@
 
                     @if (GameDateFilterList.Count > 1)
                     {
-                        <div>
+                        <div class="filter-item">
                             <label for="gameDateFilter">Filter by Game Date:</label>
                             <select id="gameDateFilter">
                                 <option selected>All</option>
@@ -128,9 +126,9 @@
                                 }
                             </select>
                         </div>
-                    }                    
-                    
+                    }
                 </div>
+
             </div>
 
             <!-- Third Line: Table -->

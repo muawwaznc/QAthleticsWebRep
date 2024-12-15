@@ -24,9 +24,9 @@ namespace QAthleticsWebRep.Pages.UserPages
         protected ChampionViewModel? SelectedChampionForDialogBox { get; set; } = null;
         protected List<EventsListViewModel> EventsList { get; set; } = new();
         protected List<EventsListViewModel> FilteredEventsList { get; set; } = new();
-        protected List<string> ClassFilterList { get; set; } = new();
-        protected List<string> RaceMeasureFilterList { get; set; } = new();
-        protected List<string> GameDateFilterList { get; set; } = new();
+        protected List<string?> ClassFilterList { get; set; } = new();
+        protected List<string?> RaceMeasureFilterList { get; set; } = new();
+        protected List<string?> GameDateFilterList { get; set; } = new();
 
         #endregion
 
@@ -64,6 +64,9 @@ namespace QAthleticsWebRep.Pages.UserPages
             SelectedChampionForDialogBox = champion;
             EventsList = await UserService.GetEventsListByChampionId(champion.Id);
             FilteredEventsList = EventsList;
+            ClassFilterList = FilteredEventsList.DistinctBy(x => x.Class).Select(x => x.Class).ToList();
+            RaceMeasureFilterList = FilteredEventsList.DistinctBy(x => x.RaceMeasure).Select(x => x.RaceMeasure).ToList();
+            GameDateFilterList = FilteredEventsList.DistinctBy(x => x.GameDate).Select(x => x.GameDate).ToList();
             IsDialogOpen = true;
         }
 

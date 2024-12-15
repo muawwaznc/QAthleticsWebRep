@@ -563,6 +563,7 @@ td img {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    max-width: 320px;
 }
 
     .dialog-content img {
