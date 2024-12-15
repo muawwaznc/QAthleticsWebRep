@@ -47,7 +47,7 @@
                             <tbody class="table-group-divider">
                                 @foreach (var champion in ChampionsList)
                                 {
-                                    <tr @onclick="@(() => OpenDialog(champion.Id))">
+                                    <tr @onclick="@(async() => await OpenDialog(champion))">
                                         <td>@champion.Name</td>
                                         <td><img src="@champion.Image" class="rounded-image" /></td>
                                         <td>@champion.Address</td>
@@ -65,7 +65,7 @@
     </div>
 </section>
 
-@if (IsDialogOpen)
+@if (IsDialogOpen && SelectedChampionForDialogBox != null)
 {
     <div class="dialog-overlay" @onclick="CloseDialog">
         <div class="dialog-box" @onclick:stopPropagation>
@@ -80,7 +80,7 @@
             <div class="dialog-content">
                 <!-- Competition Picture -->
                 <div>
-                    <img src="https://via.placeholder.com/150" alt="Competition Picture">
+                    <img src="@SelectedChampionForDialogBox.Image" alt="Competition Picture">
                 </div>
 
                 <!-- Empty Space -->
@@ -88,33 +88,48 @@
 
                 <!-- Filters -->
                 <div class="dialog-filters">
-                    <div>
-                        <label for="classFilter">Filter by Class:</label>
-                        <select id="classFilter">
-                            <option selected>Choose a class...</option>
-                            <option value="1">Class 1</option>
-                            <option value="2">Class 2</option>
-                            <option value="3">Class 3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="raceMeasureFilter">Filter by Race Measure:</label>
-                        <select id="raceMeasureFilter">
-                            <option selected>Choose a measure...</option>
-                            <option value="1">Measure 1</option>
-                            <option value="2">Measure 2</option>
-                            <option value="3">Measure 3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="gameDateFilter">Filter by Game Date:</label>
-                        <select id="gameDateFilter">
-                            <option selected>Choose a date...</option>
-                            <option value="2024-01-01">Jan 1, 2024</option>
-                            <option value="2024-01-02">Jan 2, 2024</option>
-                            <option value="2024-01-03">Jan 3, 2024</option>
-                        </select>
-                    </div>
+                    @if(ClassFilterList.Count > 1)
+                    {
+                        <div>
+                            <label for="classFilter">Filter by Class:</label>
+                            <select id="classFilter">
+                                <option selected>Choose a class...</option>
+                                @foreach (var classFilter in ClassFilterList)
+                                {
+                                    <option value="@classFilter">@classFilter</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    @if (RaceMeasureFilterList.Count > 1)
+                    {
+                        <div>
+                            <label for="raceMeasureFilter">Filter by Race Measure:</label>
+                            <select id="raceMeasureFilter">
+                                <option selected>All</option>
+                                @foreach (var raceMeasureFilter in RaceMeasureFilterList)
+                                {
+                                    <option value="@raceMeasureFilter">@raceMeasureFilter</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    @if (GameDateFilterList.Count > 1)
+                    {
+                        <div>
+                            <label for="gameDateFilter">Filter by Game Date:</label>
+                            <select id="gameDateFilter">
+                                <option selected>All</option>
+                                @foreach (var GameDateFilter in GameDateFilterList)
+                                {
+                                    <option value="@GameDateFilter">@GameDateFilter</option>
+                                }
+                            </select>
+                        </div>
+                    }                    
+                    
                 </div>
             </div>
 
@@ -123,128 +138,47 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
                             <th>Class</th>
-                            <th>Race Measure</th>
+                            <th>Event</th>
+                            <th>Game Group</th>
+                            <th>Game Stage</th>
+                            <th>Status</th>
                             <th>Game Date</th>
-                            <th>Column 6</th>
-                            <th>Column 7</th>
-                            <th>Column 8</th>
-                            <th>Column 9</th>
-                            <th>Column 10</th>
-                            <th>Column 11</th>
-                            <th>Column 12</th>
-                            <th>Column 13</th>
-                            <th>Column 14</th>
-                            <th>Column 15</th>
+                            <th>Begin Time</th>
+                            <th>Race Measure</th>
+                            <th>Race Team</th>
+                            <th>Download Start List</th>
+                            <th>Command Result</th>
+                            <th>Command Final Result</th>
+                            <th>Download Photofinish</th>
+                            <th>Download Result</th>
+                            <th>Result Remark</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>Class 1</td>
-                            <td>Measure 1</td>
-                            <td>2024-01-01</td>
-                            <td>Data 6</td>
-                            <td>Data 7</td>
-                            <td>Data 8</td>
-                            <td>Data 9</td>
-                            <td>Data 10</td>
-                            <td>Data 11</td>
-                            <td>Data 12</td>
-                            <td>Data 13</td>
-                            <td>Data 14</td>
-                            <td>Data 15</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>Class 1</td>
-                            <td>Measure 1</td>
-                            <td>2024-01-01</td>
-                            <td>Data 6</td>
-                            <td>Data 7</td>
-                            <td>Data 8</td>
-                            <td>Data 9</td>
-                            <td>Data 10</td>
-                            <td>Data 11</td>
-                            <td>Data 12</td>
-                            <td>Data 13</td>
-                            <td>Data 14</td>
-                            <td>Data 15</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>Class 1</td>
-                            <td>Measure 1</td>
-                            <td>2024-01-01</td>
-                            <td>Data 6</td>
-                            <td>Data 7</td>
-                            <td>Data 8</td>
-                            <td>Data 9</td>
-                            <td>Data 10</td>
-                            <td>Data 11</td>
-                            <td>Data 12</td>
-                            <td>Data 13</td>
-                            <td>Data 14</td>
-                            <td>Data 15</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>Class 1</td>
-                            <td>Measure 1</td>
-                            <td>2024-01-01</td>
-                            <td>Data 6</td>
-                            <td>Data 7</td>
-                            <td>Data 8</td>
-                            <td>Data 9</td>
-                            <td>Data 10</td>
-                            <td>Data 11</td>
-                            <td>Data 12</td>
-                            <td>Data 13</td>
-                            <td>Data 14</td>
-                            <td>Data 15</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>Class 1</td>
-                            <td>Measure 1</td>
-                            <td>2024-01-01</td>
-                            <td>Data 6</td>
-                            <td>Data 7</td>
-                            <td>Data 8</td>
-                            <td>Data 9</td>
-                            <td>Data 10</td>
-                            <td>Data 11</td>
-                            <td>Data 12</td>
-                            <td>Data 13</td>
-                            <td>Data 14</td>
-                            <td>Data 15</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>Class 1</td>
-                            <td>Measure 1</td>
-                            <td>2024-01-01</td>
-                            <td>Data 6</td>
-                            <td>Data 7</td>
-                            <td>Data 8</td>
-                            <td>Data 9</td>
-                            <td>Data 10</td>
-                            <td>Data 11</td>
-                            <td>Data 12</td>
-                            <td>Data 13</td>
-                            <td>Data 14</td>
-                            <td>Data 15</td>
-                        </tr>
+                        @foreach (var eventItem in FilteredEventsList)
+                        {
+                            <tr>
+                                <td>@eventItem.Class</td>
+                                <td>@eventItem.Event</td>
+                                <td>@eventItem.GameGroup</td>
+                                <td>@eventItem.GameStage</td>
+                                <td>@eventItem.Status</td>
+                                <td>@eventItem.GameDate</td>
+                                <td>@eventItem.BeginTime</td>
+                                <td>@eventItem.RaceMeasure</td>
+                                <td>@eventItem.RaceTeam</td>
+                                <td>@eventItem.DownloadStartList</td>
+                                <td>@eventItem.CommandResult</td>
+                                <td>@eventItem.CommandFinalResult</td>
+                                <td>@eventItem.DownloadPhotofinish</td>
+                                <td>@eventItem.DownloadResult</td>
+                                <td>@eventItem.ResultRemark</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>

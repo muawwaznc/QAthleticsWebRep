@@ -9,6 +9,6 @@ namespace QAthleticsWebRep.Services.IServices
 
         Task<List<ChampionViewModel>> GetChampionsList();
 
-        Task<List<EventsListViewModel>> GetEventsListByCompetetionId(int id);
+        Task<List<EventsListViewModel>> GetEventsListByChampionId(int id);
     }
 }

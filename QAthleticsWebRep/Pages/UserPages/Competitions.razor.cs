@@ -21,7 +21,12 @@ namespace QAthleticsWebRep.Pages.UserPages
 
         protected List<ChampionViewModel> ChampionsList { get; set; } = new();
         protected bool IsDialogOpen { get; set; } = false;
-        protected int SelectedIdForDialogBox {get;set;}
+        protected ChampionViewModel? SelectedChampionForDialogBox { get; set; } = null;
+        protected List<EventsListViewModel> EventsList { get; set; } = new();
+        protected List<EventsListViewModel> FilteredEventsList { get; set; } = new();
+        protected List<string> ClassFilterList { get; set; } = new();
+        protected List<string> RaceMeasureFilterList { get; set; } = new();
+        protected List<string> GameDateFilterList { get; set; } = new();
 
         #endregion
 
@@ -54,9 +59,11 @@ namespace QAthleticsWebRep.Pages.UserPages
             NavigationManager.NavigateTo("/");
         }
 
-        protected void OpenDialog(int id)
+        protected async Task OpenDialog(ChampionViewModel champion)
         {
-            SelectedIdForDialogBox = id;
+            SelectedChampionForDialogBox = champion;
+            EventsList = await UserService.GetEventsListByChampionId(champion.Id);
+            FilteredEventsList = EventsList;
             IsDialogOpen = true;
         }
 

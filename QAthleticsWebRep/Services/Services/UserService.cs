@@ -41,7 +41,7 @@ namespace QAthleticsWebRep.Services.Services
             }
         }
 
-        public async Task<List<EventsListViewModel>> GetEventsListByCompetetionId(int id)
+        public async Task<List<EventsListViewModel>> GetEventsListByChampionId(int id)
         {
             using (var db = new QAthleticsWebRepContext())
             {
@@ -62,7 +62,11 @@ namespace QAthleticsWebRep.Services.Services
                     DownloadPhotofinish = x.DownloadPhotofinish,
                     DownloadResult = x.DownloadResult,
                     ResultRemark = x.ResultRemark
-                }).ToListAsync();
+                }).OrderBy(x => x.GameDate)
+                .ThenBy(x => x.BeginTime)
+                .ThenBy(x => x.Event)
+                .ThenBy(x => x.GameGroup)
+                .ToListAsync();
                 return eventsList;
             }
 

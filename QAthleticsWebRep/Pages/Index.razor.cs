@@ -21,36 +21,18 @@ namespace QAthleticsWebRep.Pages
 
         #region Properties
 
-        private string[] backstretchImages = new[]
-        {
-            "",
-            ""
-        };
-
-        protected string CurrentBackground { get; set; } = "";
-		protected string SigninBackground { get; set; } = "";
-		private int currentIndex = 0;
-        private System.Timers.Timer timer;
-
-        protected string UserId { get; set; }
-        protected string Password { get; set; }
-
-        protected string ErrorString { get; set; }
+		protected string? SigninBackground { get; set; } 
+        protected string? UserId { get; set; }
+        protected string? Password { get; set; }
+        protected string? ErrorString { get; set; }
 
         #endregion
 
         #region Load Initials
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-			SigninBackground = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
-			CurrentBackground = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
-            backstretchImages[0] = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
-            backstretchImages[1] = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
-            await Task.Run(() =>
-            {
-                StartTimer();
-            });
+            SigninBackground = $"{FileManager.GetImageUrl("CompetitionPhotos/competition%20background.jpg")}";
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -91,35 +73,6 @@ namespace QAthleticsWebRep.Pages
                 ErrorString = "Something went wrong, please try again later.";
             }
             
-        }
-
-        private async Task ScrollToSigninSection()
-        {
-            await JsRuntime.InvokeVoidAsync("scrollToSection", "#siginin");
-        }
-
-        #endregion
-
-        #region Timer Functions
-
-        private void StartTimer()
-        {
-            timer = new System.Timers.Timer(2000);
-            timer.Elapsed += ChangeBackground;
-            timer.Start();
-        }
-
-        private void ChangeBackground(object sender, ElapsedEventArgs e)
-        {
-            currentIndex = (currentIndex + 1) % backstretchImages.Length;
-            CurrentBackground = backstretchImages[currentIndex];
-
-            InvokeAsync(StateHasChanged);
-        }
-
-        public void Dispose()
-        {
-            timer?.Dispose();
         }
 
         #endregion
