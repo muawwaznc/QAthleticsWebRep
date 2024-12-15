@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using QAthleticsWebRep.QAthleticsDatabaseContext;
 using QAthleticsWebRep.Services.IServices;
 using QAthleticsWebRep.ViewModel;
+using System.ComponentModel.Design;
 
 namespace QAthleticsWebRep.Pages.UserPages
 {
@@ -12,8 +13,8 @@ namespace QAthleticsWebRep.Pages.UserPages
         #region Injections
 
         [Inject] protected IUserService UserService { get; set; }
-        [Inject] ProtectedSessionStorage ProtectedSessionStore { get; set; }
-        [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject] protected ProtectedSessionStorage ProtectedSessionStore { get; set; }
+        [Inject] protected NavigationManager NavigationManager { get; set; }
 
         #endregion
 
@@ -73,6 +74,43 @@ namespace QAthleticsWebRep.Pages.UserPages
         protected void CloseDialog()
         {
             IsDialogOpen = false;
+        }
+
+        #endregion
+
+        #region OnChange Functions
+
+        protected void OnGameDateFilterChange(ChangeEventArgs e)
+        {
+            var selectedGameDateFilter = e.Value?.ToString();
+            if(selectedGameDateFilter == "All")
+            {
+                FilteredEventsList = EventsList;
+                return;
+            }
+            FilteredEventsList = EventsList.Where(x => x.GameDate == selectedGameDateFilter).ToList();
+        }
+
+        protected void OnRaceMeasureFilterChange(ChangeEventArgs e)
+        {
+            var selectedRaceMeasureFilter = e.Value?.ToString();
+            if (selectedRaceMeasureFilter == "All")
+            {
+                FilteredEventsList = EventsList;
+                return;
+            }
+            FilteredEventsList = EventsList.Where(x => x.RaceMeasure == selectedRaceMeasureFilter).ToList();
+        }
+
+        protected void OnClassFilterChange(ChangeEventArgs e)
+        {
+            var selectedClassFilter = e.Value?.ToString();
+            if (selectedClassFilter == "All")
+            {
+                FilteredEventsList = EventsList;
+                return;
+            }
+            FilteredEventsList = EventsList.Where(x => x.Class == selectedClassFilter).ToList();
         }
 
         #endregion

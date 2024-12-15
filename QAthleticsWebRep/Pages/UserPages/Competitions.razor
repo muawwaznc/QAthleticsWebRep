@@ -91,7 +91,7 @@
                     {
                         <div>
                             <label for="classFilter">Filter by Class:</label>
-                            <select id="classFilter">
+                            <select id="classFilter" @onchange="OnClassFilterChange">
                                 <option value="All" selected>All</option>
                                 @foreach (var classFilter in ClassFilterList)
                                 {
@@ -105,7 +105,7 @@
                     {
                         <div>
                             <label for="raceMeasureFilter">Filter by Race Measure:</label>
-                            <select id="raceMeasureFilter">
+                            <select id="raceMeasureFilter" @onchange="OnRaceMeasureFilterChange">
                                 <option value="All" selected>All</option>
                                 @foreach (var raceMeasureFilter in RaceMeasureFilterList)
                                 {
@@ -119,7 +119,7 @@
                     {
                         <div>
                             <label for="gameDateFilter">Filter by Game Date:</label>
-                            <select id="gameDateFilter">
+                            <select id="gameDateFilter" @onchange="OnGameDateFilterChange">
                                 <option value="All" selected>All</option>
                                 @foreach (var GameDateFilter in GameDateFilterList)
                                 {
@@ -133,7 +133,7 @@
 
             <!-- Third Line: Table -->
             <div class="dialog-box-table-div table-responsive">
-                <table class="table">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>Class</th>
@@ -166,7 +166,12 @@
                                 <td>@eventItem.BeginTime</td>
                                 <td>@eventItem.RaceMeasure</td>
                                 <td>@eventItem.RaceTeam</td>
-                                <td>@eventItem.DownloadStartList</td>
+                                <td>
+                                    @if(eventItem.DownloadStartList != null && eventItem.DownloadStartList != "")
+                                    {
+                                        <button class="btn btn-outline-dark">@eventItem.DownloadStartList</button>
+                                    }
+                                </td>
                                 <td>@eventItem.CommandResult</td>
                                 <td>@eventItem.CommandFinalResult</td>
                                 <td>@eventItem.DownloadPhotofinish</td>

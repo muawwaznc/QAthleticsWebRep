@@ -471,12 +471,12 @@ a {
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-    background-color: #f1f1f1;
+    background-color: #8c8c8c;
     border-radius: 4px;
 }
 
     .table-responsive::-webkit-scrollbar-thumb:hover {
-        background-color: #e0e0e0;
+        background-color: #756f6f;
     }
 
 .table-responsive::-webkit-scrollbar-track {
