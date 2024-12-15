@@ -172,10 +172,30 @@
                                         <button class="btn btn-outline-dark">@eventItem.DownloadStartList</button>
                                     }
                                 </td>
-                                <td>@eventItem.CommandResult</td>
-                                <td>@eventItem.CommandFinalResult</td>
-                                <td>@eventItem.DownloadPhotofinish</td>
-                                <td>@eventItem.DownloadResult</td>
+                                <td>
+                                    @if (eventItem.CommandResult != null && eventItem.CommandResult != "")
+                                    {
+                                        <button class="btn btn-outline-dark">@eventItem.CommandResult</button>
+                                    }
+                                </td>
+                                <td>
+                                    @if (eventItem.CommandFinalResult != null && eventItem.CommandFinalResult != "")
+                                    {
+                                        <button class="btn btn-outline-dark">@eventItem.CommandFinalResult</button>
+                                    }
+                                </td>
+                                <td>
+                                    @if (eventItem.DownloadPhotofinish != null && eventItem.DownloadPhotofinish != "")
+                                    {
+                                        <button class="btn btn-outline-dark">@eventItem.DownloadPhotofinish</button>
+                                    }
+                                </td>
+                                <td>
+                                    @if (eventItem.DownloadResult != null && eventItem.DownloadResult != "")
+                                    {
+                                        <button class="btn btn-outline-dark">@eventItem.DownloadResult</button>
+                                    }
+                                </td>
                                 <td>@eventItem.ResultRemark</td>
                             </tr>
                         }
