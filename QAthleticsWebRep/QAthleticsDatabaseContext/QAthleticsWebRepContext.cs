@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace QAthleticsWebRep.DatabaseContext
+namespace QAthleticsWebRep.QAthleticsDatabaseContext
 {
     public partial class QAthleticsWebRepContext : DbContext
     {
@@ -24,6 +24,7 @@ namespace QAthleticsWebRep.DatabaseContext
         public virtual DbSet<ResultsRelay> ResultsRelays { get; set; } = null!;
         public virtual DbSet<TGame> TGames { get; set; } = null!;
         public virtual DbSet<TGameSresult> TGameSresults { get; set; } = null!;
+        public virtual DbSet<TluChampionV> TluChampionVs { get; set; } = null!;
         public virtual DbSet<Tluchampion> Tluchampions { get; set; } = null!;
         public virtual DbSet<Tluclass> Tluclasses { get; set; } = null!;
         public virtual DbSet<Tluclub> Tluclubs { get; set; } = null!;
@@ -66,9 +67,29 @@ namespace QAthleticsWebRep.DatabaseContext
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CommandFinalResult)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommandResult)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Competition)
                     .HasMaxLength(70)
                     .IsUnicode(false);
+
+                entity.Property(e => e.DownloadPhotofinish)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DownloadResult)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DownloadStartList)
+                    .HasMaxLength(10)
+                    .IsFixedLength();
 
                 entity.Property(e => e.Event)
                     .HasMaxLength(30)
@@ -78,7 +99,10 @@ namespace QAthleticsWebRep.DatabaseContext
                     .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.GameDate).HasColumnType("smalldatetime");
+                entity.Property(e => e.GameDate)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("Game Date");
 
                 entity.Property(e => e.GameParticipates)
                     .HasMaxLength(1)
@@ -116,6 +140,10 @@ namespace QAthleticsWebRep.DatabaseContext
                     .HasMaxLength(60)
                     .IsUnicode(false)
                     .IsFixedLength();
+
+                entity.Property(e => e.ResultRemark)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(25)
@@ -336,6 +364,14 @@ namespace QAthleticsWebRep.DatabaseContext
                     .IsUnicode(false)
                     .IsFixedLength();
 
+                entity.Property(e => e.CommandFinalResult)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommandResult)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CompititionRecord)
                     .HasMaxLength(150)
                     .IsUnicode(false)
@@ -344,6 +380,18 @@ namespace QAthleticsWebRep.DatabaseContext
                 entity.Property(e => e.DataEntry)
                     .HasMaxLength(25)
                     .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.DownloadPhotofinish)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DownloadResult)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DownloadStartList)
+                    .HasMaxLength(10)
                     .IsFixedLength();
 
                 entity.Property(e => e.ElectronicDistance)
@@ -408,6 +456,10 @@ namespace QAthleticsWebRep.DatabaseContext
                     .HasColumnType("smalldatetime")
                     .HasColumnName("Result Finished Datetime");
 
+                entity.Property(e => e.ResultRemark)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Tlucahmpion)
                     .HasColumnName("TLUCahmpion")
                     .HasDefaultValueSql("((0))");
@@ -467,6 +519,34 @@ namespace QAthleticsWebRep.DatabaseContext
                 entity.Property(e => e.PlayerResult)
                     .HasMaxLength(12)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TluChampionV>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("tluChampionV");
+
+                entity.Property(e => e.Caddress)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("CAddress");
+
+                entity.Property(e => e.Descr1)
+                    .HasMaxLength(70)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Expr1)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("EXPR1");
+
+                entity.Property(e => e.No1).HasColumnName("no1");
+
+                entity.Property(e => e.Startdate)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("startdate");
             });
 
             modelBuilder.Entity<Tluchampion>(entity =>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QAthleticsWebRep.DatabaseContext
+namespace QAthleticsWebRep.QAthleticsDatabaseContext
 {
-    public partial class TluplayerStatus
+    public partial class TluresultType
     {
         public short No1 { get; set; }
         public string? Descr1 { get; set; }

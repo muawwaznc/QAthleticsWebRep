@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using QAthleticsWebRep.DatabaseContext;
+using QAthleticsWebRep.QAthleticsDatabaseContext;
 using QAthleticsWebRep.Services.IServices;
 using QAthleticsWebRep.ViewModel;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QAthleticsWebRep.DatabaseContext
+namespace QAthleticsWebRep.QAthleticsDatabaseContext
 {
     public partial class Tuser
     {

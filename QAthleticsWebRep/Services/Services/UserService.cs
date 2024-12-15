@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QAthleticsWebRep.DatabaseContext;
+using QAthleticsWebRep.QAthleticsDatabaseContext;
 using QAthleticsWebRep.Services.IServices;
 using QAthleticsWebRep.ViewModel;
+using System.Formats.Asn1;
+using System.Security.AccessControl;
 
 namespace QAthleticsWebRep.Services.Services
 {
@@ -37,6 +39,33 @@ namespace QAthleticsWebRep.Services.Services
                 }).ToListAsync();
                 return champions;
             }
+        }
+
+        public async Task<List<EventsListViewModel>> GetEventsListByCompetetionId(int id)
+        {
+            using (var db = new QAthleticsWebRepContext())
+            {
+                var eventsList = await db.EventsLists.Where(x => x.No1 == id).Select(x => new EventsListViewModel
+                {
+                    Class = x.Class,
+                    Event = x.Event,
+                    GameGroup = x.GameGroup,
+                    GameStage = x.GameStage,
+                    Status = x.Status,
+                    GameDate = x.GameDate,
+                    BeginTime = x.BeginTime,
+                    RaceMeasure = x.RaceMeasure,
+                    RaceTeam = x.RaceTeam,
+                    DownloadStartList = x.DownloadStartList,
+                    CommandResult = x.CommandResult,
+                    CommandFinalResult = x.CommandFinalResult,
+                    DownloadPhotofinish = x.DownloadPhotofinish,
+                    DownloadResult = x.DownloadResult,
+                    ResultRemark = x.ResultRemark
+                }).ToListAsync();
+                return eventsList;
+            }
+
         }
     }
 }

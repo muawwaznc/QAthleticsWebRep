@@ -462,11 +462,28 @@ a {
 
 .table {
     background: white;
-    border: 1px solid black;
     color: #26253a;
 }
 
-tbody tr{
+.table-responsive::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background-color: #e0e0e0;
+    }
+
+.table-responsive::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+tbody tr {
     cursor: pointer;
 }
 
@@ -480,9 +497,9 @@ thead, th {
 }
 
 .rounded-image {
-    width: auto; 
+    width: auto;
     height: auto;
-    max-height: none; 
+    max-height: none;
     object-fit: contain;
 }
 
@@ -515,7 +532,7 @@ td img {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 80%;
     max-width: 80vw;
-    max-height: 80vh;
+    max-height: 95vh;
     position: relative;
     padding: 20px;
     z-index: 1060;
@@ -574,7 +591,11 @@ td img {
 
 /* Table Styling */
 .dialog-box-table-div {
-    /*max-height: calc(50vh - 50rem);*/
+    max-height: calc(90vh - 250px);
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .dialog-table {

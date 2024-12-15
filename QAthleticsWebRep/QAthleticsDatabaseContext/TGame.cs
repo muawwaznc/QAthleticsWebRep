@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QAthleticsWebRep.DatabaseContext
+namespace QAthleticsWebRep.QAthleticsDatabaseContext
 {
     public partial class TGame
     {
@@ -33,6 +33,12 @@ namespace QAthleticsWebRep.DatabaseContext
         public DateTime? ResultFinishedDatetime { get; set; }
         public DateTime? ResultApprovedDateTime { get; set; }
         public short? ResultType { get; set; }
+        public string? DownloadStartList { get; set; }
+        public string? CommandResult { get; set; }
+        public string? CommandFinalResult { get; set; }
+        public string? DownloadPhotofinish { get; set; }
+        public string? DownloadResult { get; set; }
+        public string? ResultRemark { get; set; }
 
         public virtual Tluchampion? TlucahmpionNavigation { get; set; }
         public virtual Tluclass? TluclassNavigation { get; set; }
