@@ -558,36 +558,53 @@ td img {
     cursor: pointer;
 }
 
+
 /* Content Styling */
 .dialog-content {
     display: flex;
     gap: 20px;
-    margin-bottom: 20px;
-    max-width: 320px;
+    margin-bottom: 10px;
+    max-height: 170px; /* Allow full width */
 }
 
-    .dialog-content img {
-        max-width: 100%;
-        height: auto;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+/* Part 1: Image */
+.dialog-image {
+    flex: 1; 
+}
 
+.dialog-content img {
+    max-width: 100%;
+    height: auto;
+    max-height: 170px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Part 2: Empty */
+.dialog-empty {
+    flex: 1; 
+}
+
+/* Part 3: Filters */
 .dialog-filters {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
     .dialog-filters label {
         font-weight: bold;
-        margin-bottom: 5px;
+        margin: 0px;
+        text-align: left;
     }
 
     .dialog-filters select {
         padding: 5px;
+        margin: 0;
         border: 1px solid #ccc;
         border-radius: 4px;
+        width: 100%; 
+        text-align-last: center;
     }
 
 /* Table Styling */

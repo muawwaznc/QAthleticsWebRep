@@ -76,22 +76,23 @@
             </div>
             <hr />
 
-            <!-- Second Line: Competition Picture, Empty Space, and Filters -->
             <div class="dialog-content">
-                
-                <div>
+
+                <div class="dialog-image">
                     <img src="@SelectedChampionForDialogBox.Image" alt="Competition Picture">
                 </div>
 
-                <div style="flex: 1;"></div>
+
+                <div class="dialog-empty"></div>
+
 
                 <div class="dialog-filters">
                     @if (ClassFilterList.Count > 1)
                     {
-                        <div class="filter-item">
+                        <div>
                             <label for="classFilter">Filter by Class:</label>
                             <select id="classFilter">
-                                <option selected>Choose a class...</option>
+                                <option value="All" selected>All</option>
                                 @foreach (var classFilter in ClassFilterList)
                                 {
                                     <option value="@classFilter">@classFilter</option>
@@ -102,10 +103,10 @@
 
                     @if (RaceMeasureFilterList.Count > 1)
                     {
-                        <div class="filter-item">
+                        <div>
                             <label for="raceMeasureFilter">Filter by Race Measure:</label>
                             <select id="raceMeasureFilter">
-                                <option selected>All</option>
+                                <option value="All" selected>All</option>
                                 @foreach (var raceMeasureFilter in RaceMeasureFilterList)
                                 {
                                     <option value="@raceMeasureFilter">@raceMeasureFilter</option>
@@ -116,10 +117,10 @@
 
                     @if (GameDateFilterList.Count > 1)
                     {
-                        <div class="filter-item">
+                        <div>
                             <label for="gameDateFilter">Filter by Game Date:</label>
                             <select id="gameDateFilter">
-                                <option selected>All</option>
+                                <option value="All" selected>All</option>
                                 @foreach (var GameDateFilter in GameDateFilterList)
                                 {
                                     <option value="@GameDateFilter">@GameDateFilter</option>
@@ -128,7 +129,6 @@
                         </div>
                     }
                 </div>
-
             </div>
 
             <!-- Third Line: Table -->
