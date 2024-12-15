@@ -28,6 +28,7 @@ namespace QAthleticsWebRep.Services.Services
             {
                 var champions = await db.Tluchampions.Where(x => x.ChampStatus == "1").Select(x => new ChampionViewModel
                 {
+                    Id = x.No1,
                     Name = x.Descr1,
                     Image = _fileManager.GetImageUrl($"CompetitionPhotos/ChampionshipPhotos/{x.No1}.jpg"),
                     Address = x.Caddress,

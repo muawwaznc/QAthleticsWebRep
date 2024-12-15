@@ -8,7 +8,7 @@ namespace QAthleticsWebRep.Pages.UserPages
 {
     public partial class Competitions : ComponentBase
     {
-        
+
         #region Injections
 
         [Inject] protected IUserService UserService { get; set; }
@@ -20,6 +20,8 @@ namespace QAthleticsWebRep.Pages.UserPages
         #region Properties
 
         protected List<ChampionViewModel> ChampionsList { get; set; } = new();
+        protected bool IsDialogOpen { get; set; } = false;
+        protected int SelectedIdForDialogBox {get;set;}
 
         #endregion
 
@@ -44,12 +46,23 @@ namespace QAthleticsWebRep.Pages.UserPages
 
         #endregion
 
-        #region Navigation Function
+        #region Navigation and Dilogue Function
 
         protected async Task Logout()
         {
             await ProtectedSessionStore.DeleteAsync("UserId");
             NavigationManager.NavigateTo("/");
+        }
+
+        protected void OpenDialog(int id)
+        {
+            SelectedIdForDialogBox = id;
+            IsDialogOpen = true;
+        }
+
+        protected void CloseDialog()
+        {
+            IsDialogOpen = false;
         }
 
         #endregion
