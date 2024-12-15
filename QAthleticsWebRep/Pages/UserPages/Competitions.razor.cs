@@ -69,7 +69,12 @@ namespace QAthleticsWebRep.Pages.UserPages
             EventsList = await UserService.GetEventsListByChampionId(champion.Id);
             FilteredEventsList = EventsList;
             ClassFilterList = FilteredEventsList.DistinctBy(x => x.Class).Select(x => x.Class).ToList();
-            RaceMeasureFilterList = FilteredEventsList.DistinctBy(x => x.RaceMeasure).Select(x => x.RaceMeasure).ToList();
+            RaceMeasureFilterList = FilteredEventsList
+                .Select(x =>
+                    x.RaceMeasure?.ToLower() == "t" ? "Track" :
+                    (x.RaceMeasure?.ToLower() == "d" || x.RaceMeasure?.ToLower() == "h" ? "Field" : x.RaceMeasure))
+                .Distinct()
+                .ToList();
             GameDateFilterList = FilteredEventsList.DistinctBy(x => x.GameDate).Select(x => x.GameDate).ToList();
             IsDialogOpen = true;
         }
@@ -114,9 +119,18 @@ namespace QAthleticsWebRep.Pages.UserPages
 
             if (SelectedRaceMeasureFilter != "All")
             {
-                FilteredEventsList = FilteredEventsList
-                    .Where(x => x.RaceMeasure == SelectedRaceMeasureFilter)
-                    .ToList();
+                if(SelectedRaceMeasureFilter == "Track")
+                {
+                    FilteredEventsList = FilteredEventsList
+                        .Where(x => x.RaceMeasure?.ToLower() == "t")
+                        .ToList();
+                }
+                else if(SelectedRaceMeasureFilter == "Field")
+                {
+                    FilteredEventsList = FilteredEventsList
+                        .Where(x => x.RaceMeasure?.ToLower() == "d" || x.RaceMeasure?.ToLower() == "h")
+                        .ToList();
+                }
             }
 
             if (SelectedGameDateFilter != "All")
