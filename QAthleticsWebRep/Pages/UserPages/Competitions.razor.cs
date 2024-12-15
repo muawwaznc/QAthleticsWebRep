@@ -4,6 +4,7 @@ using QAthleticsWebRep.QAthleticsDatabaseContext;
 using QAthleticsWebRep.Services.IServices;
 using QAthleticsWebRep.ViewModel;
 using System.ComponentModel.Design;
+using System.Globalization;
 
 namespace QAthleticsWebRep.Pages.UserPages
 {
@@ -28,6 +29,7 @@ namespace QAthleticsWebRep.Pages.UserPages
         protected List<string?> ClassFilterList { get; set; } = new();
         protected List<string?> RaceMeasureFilterList { get; set; } = new();
         protected List<string?> GameDateFilterList { get; set; } = new();
+        protected List<string?> GameDayFilterList { get; set; } = new();
         protected string? SelectedClassFilter { get; set; } = "All";
         protected string? SelectedRaceMeasureFilter { get; set; } = "All";
         protected string? SelectedGameDateFilter { get; set; } = "All";
@@ -75,13 +77,42 @@ namespace QAthleticsWebRep.Pages.UserPages
                     (x.RaceMeasure?.ToLower() == "d" || x.RaceMeasure?.ToLower() == "h" ? "Field" : x.RaceMeasure))
                 .Distinct()
                 .ToList();
-            GameDateFilterList = FilteredEventsList.DistinctBy(x => x.GameDate).Select(x => x.GameDate).ToList();
+            GameDateFilterList = FilteredEventsList
+                    .Select(x => x.GameDate)
+                    .Distinct()
+                    .OrderBy(x => x)
+                    .ToList();
+            GameDayFilterList = GameDateFilterList?.Select((x, index) => $"{GetOrdinal(index + 1)}").ToList();
             IsDialogOpen = true;
         }
 
         protected void CloseDialog()
         {
             IsDialogOpen = false;
+        }
+
+        private string GetOrdinal(int number)
+        {
+            if (number <= 0)
+            {
+                return number.ToString();
+            }
+            else if(number == 1)
+            {
+                return "First Day";
+            }
+            else if (number == 2)
+            {
+                return "Second Day";
+            }
+            else if (number == 3)
+            {
+                return "Third Day";
+            }
+            else
+            {
+                return number + "th Day";
+            }
         }
 
         #endregion
@@ -135,8 +166,9 @@ namespace QAthleticsWebRep.Pages.UserPages
 
             if (SelectedGameDateFilter != "All")
             {
+                int index = GameDayFilterList.IndexOf(SelectedGameDateFilter);
                 FilteredEventsList = FilteredEventsList
-                    .Where(x => x.GameDate == SelectedGameDateFilter)
+                    .Where(x => x.GameDate == GameDateFilterList[index])
                     .ToList();
             }
         }

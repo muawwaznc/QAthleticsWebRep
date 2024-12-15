@@ -388,11 +388,11 @@ a {
     padding-bottom: 12rem;
     height: 100vh;
     z-index: 0;
-    overflow: hidden; /* Ensures the overlay stays confined */
+    overflow: hidden;
 }
 
     /* Overlay for #siginin */
-    #siginin::before {
+    /*#siginin::before {
         content: '';
         position: absolute;
         top: 0;
@@ -401,7 +401,7 @@ a {
         height: 100%;
         background: rgba(0, 0, 0, 0.8); 
         z-index: -1;
-    }
+    }*/
 
     #siginin .newsletter_detail {
         padding-top: 3rem;
@@ -425,6 +425,11 @@ a {
     #siginin input {
         height: 45px;
     }
+
+        #siginin input:-webkit-autofill {
+            background: transparent !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
 
         #siginin input[type="submit"] {
             background: #26253a;

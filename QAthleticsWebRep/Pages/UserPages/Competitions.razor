@@ -90,7 +90,7 @@
                     @if (ClassFilterList.Count > 1)
                     {
                         <div>
-                            <label for="classFilter">Filter by Class:</label>
+                            <label for="classFilter">Class:</label>
                             <select id="classFilter" @onchange="OnClassFilterChange">
                                 <option value="All" selected>All</option>
                                 @foreach (var classFilter in ClassFilterList)
@@ -104,7 +104,7 @@
                     @if (RaceMeasureFilterList.Count > 1)
                     {
                         <div>
-                            <label for="raceMeasureFilter">Filter by Race Measure:</label>
+                            <label for="raceMeasureFilter">Track/ Field:</label>
                             <select id="raceMeasureFilter" @onchange="OnRaceMeasureFilterChange">
                                 <option value="All" selected>All</option>
                                 @foreach (var raceMeasureFilter in RaceMeasureFilterList)
@@ -118,12 +118,12 @@
                     @if (GameDateFilterList.Count > 1)
                     {
                         <div>
-                            <label for="gameDateFilter">Filter by Game Date:</label>
+                            <label for="gameDateFilter">Day:</label>
                             <select id="gameDateFilter" @onchange="OnGameDateFilterChange">
                                 <option value="All" selected>All</option>
-                                @foreach (var GameDateFilter in GameDateFilterList)
+                                @foreach (var GameDayFilter in GameDayFilterList)
                                 {
-                                    <option value="@GameDateFilter">@GameDateFilter</option>
+                                    <option value="@GameDayFilter">@GameDayFilter</option>
                                 }
                             </select>
                         </div>
@@ -149,11 +149,11 @@
                                 <th>Game Date</th>
                             }
                             <th>Begin Time</th>
-                            @if (SelectedRaceMeasureFilter == "All")
+                            @* @if (SelectedRaceMeasureFilter == "All")
                             {
                                 <th>Race Measure</th>
-                            }
-                            <th>Race Team</th>
+                            } *@
+                            @* <th>Race Team</th> *@
                             <th>Download Start List</th>
                             <th>Command Result</th>
                             <th>Command Final Result</th>
@@ -179,11 +179,11 @@
                                     <td>@eventItem.GameDate</td>
                                 }
                                 <td>@eventItem.BeginTime</td>
-                                @if (SelectedRaceMeasureFilter == "All")
+                                @* @if (SelectedRaceMeasureFilter == "All")
                                 {
                                     <td>@eventItem.RaceMeasure</td>
-                                }
-                                <td>@eventItem.RaceTeam</td>
+                                } *@
+                                @* <td>@eventItem.RaceTeam</td> *@
                                 <td>
                                     @if(eventItem.DownloadStartList != null && eventItem.DownloadStartList != "")
                                     {
