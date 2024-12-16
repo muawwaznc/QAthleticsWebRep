@@ -192,7 +192,7 @@ namespace QAthleticsWebRep.Pages.UserPages
 
         protected async Task DownloadPhotoFinish(int number, int gameAutono)
         {
-            var photoFinishUrl = FileManager.GetImageUrl($"CompetitionPhotos/ChampionshipPhotos/photofinish/{number}/{gameAutono}.jpg");
+            var photoFinishUrl = FileManager.GetImageUrl($"CompetitionPhotos/photofinish/{number}/{gameAutono}.jpg");
             PhotoFinishUrl = photoFinishUrl;
             var response = await HttpClient.GetAsync(photoFinishUrl);
             if (response.IsSuccessStatusCode)
