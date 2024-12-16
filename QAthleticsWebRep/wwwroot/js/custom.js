@@ -1,11 +1,12 @@
 
 function downloadFileFromUrl(url, fileName) {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = fileName;
+    anchor.target = '_blank';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);    
 }
 
 /* Preloader */

@@ -251,12 +251,18 @@
                                         {
                                             @if(eventItem.TluGameStatus == 7)
                                             {
-                                                <button class="btn btn-outline-dark">@eventItem.DownloadResult</button>
+                                                <button class="btn btn-outline-dark"
+                                                    @onclick="@(async() => await DownloadResult(eventItem.Number, eventItem.GameAutono))">
+                                                    @eventItem.DownloadResult
+                                                </button>
                                             }
                                         }
                                         else
                                         {
-                                            <button class="btn btn-outline-dark">@eventItem.DownloadResult</button>
+                                            <button class="btn btn-outline-dark"
+                                                @onclick="@(async() => await DownloadResult(eventItem.Number, eventItem.GameAutono))">
+                                                @eventItem.DownloadResult
+                                            </button>
                                         }
                                     }
                                 </td>

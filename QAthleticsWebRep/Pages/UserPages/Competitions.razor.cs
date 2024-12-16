@@ -193,7 +193,6 @@ namespace QAthleticsWebRep.Pages.UserPages
         protected async Task DownloadPhotoFinish(int number, int gameAutono)
         {
             var photoFinishUrl = FileManager.GetImageUrl($"CompetitionPhotos/photofinish/{number}/{gameAutono}.jpg");
-            PhotoFinishUrl = photoFinishUrl;
             var response = await HttpClient.GetAsync(photoFinishUrl);
             if (response.IsSuccessStatusCode)
             {
@@ -202,9 +201,15 @@ namespace QAthleticsWebRep.Pages.UserPages
             }
         }
 
-        protected void DownloadResult()
+        protected async Task DownloadResult(int number, int gameAutono)
         {
-
+            var reportUrl = FileManager.GetImageUrl($"CompetitionPhotos/ResultsPDF/{number}/{gameAutono}.pdf");
+            var response = await HttpClient.GetAsync(reportUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                string fileName = "Report.pdf";
+                await JSRuntime.InvokeVoidAsync("downloadFileFromUrl", reportUrl, fileName);
+            }
         }
 
         #endregion
