@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.JSInterop;
 using QAthleticsWebRep.QAthleticsDatabaseContext;
 using QAthleticsWebRep.Services.IServices;
+using QAthleticsWebRep.Services.Services;
 using QAthleticsWebRep.ViewModel;
+using System;
 using System.ComponentModel.Design;
 using System.Globalization;
 
@@ -10,12 +13,20 @@ namespace QAthleticsWebRep.Pages.UserPages
 {
     public partial class Competitions : ComponentBase
     {
+        #region Parameters
+
+        [Parameter] public string? UserType { get; set; }
+
+        #endregion
 
         #region Injections
 
         [Inject] protected IUserService UserService { get; set; }
         [Inject] protected ProtectedSessionStorage ProtectedSessionStore { get; set; }
         [Inject] protected NavigationManager NavigationManager { get; set; }
+        [Inject] protected IFileManager FileManager { get; set; }
+        [Inject] HttpClient HttpClient { get; set; }
+        [Inject] IJSRuntime JSRuntime { get; set; }
 
         #endregion
 
@@ -37,6 +48,8 @@ namespace QAthleticsWebRep.Pages.UserPages
         #endregion
 
         #region Load Initials
+
+        protected string PhotoFinishUrl { get; set; } = "";
 
         protected override async Task OnInitializedAsync()
         {
@@ -171,6 +184,27 @@ namespace QAthleticsWebRep.Pages.UserPages
                     .Where(x => x.GameDate == GameDateFilterList[index])
                     .ToList();
             }
+        }
+
+        #endregion
+
+        #region Download Functions
+
+        protected async Task DownloadPhotoFinish(int number, int gameAutono)
+        {
+            var photoFinishUrl = FileManager.GetImageUrl($"CompetitionPhotos/ChampionshipPhotos/photofinish/{number}/{gameAutono}.jpg");
+            PhotoFinishUrl = photoFinishUrl;
+            var response = await HttpClient.GetAsync(photoFinishUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                string fileName = "photoFinish.jpg";
+                await JSRuntime.InvokeVoidAsync("downloadFileFromUrl", photoFinishUrl, fileName);
+            }
+        }
+
+        protected void DownloadResult()
+        {
+
         }
 
         #endregion

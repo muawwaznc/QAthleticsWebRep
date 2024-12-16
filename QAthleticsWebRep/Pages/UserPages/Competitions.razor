@@ -1,4 +1,4 @@
-﻿@page "/Competitions"
+﻿@page "/Competitions/{UserType}"
 
 <PageTitle>Q Athletics | Competitions</PageTitle>
 
@@ -193,25 +193,71 @@
                                 <td>
                                     @if (eventItem.CommandResult != null && eventItem.CommandResult != "")
                                     {
-                                        <button class="btn btn-outline-dark">@eventItem.CommandResult</button>
+                                        @if (UserType == "1")
+                                        {
+                                            @if (eventItem.TluGameStatus == 7)
+                                            {
+                                                <button class="btn btn-outline-dark">@eventItem.CommandResult</button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-dark">@eventItem.CommandResult</button>
+                                        }
                                     }
                                 </td>
                                 <td>
                                     @if (eventItem.CommandFinalResult != null && eventItem.CommandFinalResult != "")
                                     {
-                                        <button class="btn btn-outline-dark">@eventItem.CommandFinalResult</button>
+                                        @if (UserType == "1")
+                                        {
+                                            @if (eventItem.TluGameStatus == 7)
+                                            {
+                                                <button class="btn btn-outline-dark">@eventItem.CommandFinalResult</button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-dark">@eventItem.CommandFinalResult</button>
+                                        }
                                     }
                                 </td>
                                 <td>
                                     @if (eventItem.DownloadPhotofinish != null && eventItem.DownloadPhotofinish != "")
                                     {
-                                        <button class="btn btn-outline-dark">@eventItem.DownloadPhotofinish</button>
+                                        @if (UserType == "1")
+                                        {
+                                            @if (eventItem.TluGameStatus == 7)
+                                            {
+                                                <button class="btn btn-outline-dark"
+                                                    @onclick="@(async() => await DownloadPhotoFinish(eventItem.Number, eventItem.GameAutono))">
+                                                    @eventItem.DownloadPhotofinish
+                                                </button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-dark"
+                                                @onclick="@(async() => await DownloadPhotoFinish(eventItem.Number, eventItem.GameAutono))">
+                                                @eventItem.DownloadPhotofinish
+                                            </button>
+                                        }                                        
                                     }
                                 </td>
                                 <td>
                                     @if (eventItem.DownloadResult != null && eventItem.DownloadResult != "")
                                     {
-                                        <button class="btn btn-outline-dark">@eventItem.DownloadResult</button>
+                                        @if(UserType == "1")
+                                        {
+                                            @if(eventItem.TluGameStatus == 7)
+                                            {
+                                                <button class="btn btn-outline-dark">@eventItem.DownloadResult</button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-outline-dark">@eventItem.DownloadResult</button>
+                                        }
                                     }
                                 </td>
                                 <td>@eventItem.ResultRemark</td>

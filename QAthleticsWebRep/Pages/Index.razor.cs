@@ -42,7 +42,8 @@ namespace QAthleticsWebRep.Pages
                 var userId = (await ProtectedSessionStore.GetAsync<string>("UserId")).Value;
                 if (!(userId == null || userId == ""))
                 {
-                    NavigationManager.NavigateTo("/Competitions");
+                    var user = await UserService.GetUserByUserId(UserId);
+                    NavigationManager.NavigateTo("/Competitions/" + user.Usertype);
                 }
             }
         }
@@ -56,12 +57,12 @@ namespace QAthleticsWebRep.Pages
             ErrorString = "";
             try
             {
-                var user = await UserService.GetUserByEmailAndPassword(UserId, Password);
+                var user = await UserService.GetUserByUserIdAndPassword(UserId, Password);
                 if (user != null)
                 {
                     await ProtectedSessionStore.SetAsync("UserId", UserId);
                     var userId = (await ProtectedSessionStore.GetAsync<string>("UserId")).Value;
-                    NavigationManager.NavigateTo("/Competitions");
+                    NavigationManager.NavigateTo("/Competitions/" + user.Usertype);
                 }
                 else
                 {

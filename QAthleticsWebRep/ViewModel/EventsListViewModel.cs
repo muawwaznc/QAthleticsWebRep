@@ -2,11 +2,14 @@
 {
     public class EventsListViewModel
     {
+        public int Number { get; set; }
+        public int GameAutono { get; set; }
         public string? Class { get; set; }
         public string? Event { get; set; }
         public short? GameGroup { get; set; }
         public string? GameStage { get; set; }
         public string? Status { get; set; }
+        public int? TluGameStatus { get; set; }
         public string? GameDate { get; set; }
         public string? BeginTime { get; set; }
         public string? RaceMeasure { get; set; }

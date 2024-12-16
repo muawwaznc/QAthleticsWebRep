@@ -1,3 +1,13 @@
+
+function downloadFileFromUrl(url, fileName) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 /* Preloader */
 window.onload = function () {
     const preloader = document.querySelector('.preloader');

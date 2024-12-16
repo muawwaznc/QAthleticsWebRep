@@ -5,7 +5,9 @@ namespace QAthleticsWebRep.Services.IServices
 {
     public interface IUserService
     {
-        Task<Tuser> GetUserByEmailAndPassword(string userId, string password);
+        Task<Tuser?> GetUserByUserIdAndPassword(string? userId, string? password);
+
+        Task<Tuser?> GetUserByUserId(string? userId);
 
         Task<List<ChampionViewModel>> GetChampionsList();
 

@@ -15,11 +15,20 @@ namespace QAthleticsWebRep.Services.Services
             _fileManager = fileManager;
         }
 
-        public async Task<Tuser> GetUserByEmailAndPassword(string userId, string password)
+        public async Task<Tuser?> GetUserByUserIdAndPassword(string? userId, string? password)
         {
             using (var db = new QAthleticsWebRepContext())
             {
                 var user = await db.Tusers.FirstOrDefaultAsync(x => x.Userid1 == userId && x.Password1 == password);
+                return user;
+            }
+        }
+
+        public async Task<Tuser?> GetUserByUserId(string? userId)
+        {
+            using (var db = new QAthleticsWebRepContext())
+            {
+                var user = await db.Tusers.FirstOrDefaultAsync(x => x.Userid1 == userId);
                 return user;
             }
         }
@@ -47,11 +56,14 @@ namespace QAthleticsWebRep.Services.Services
             {
                 var eventsList = await db.EventsLists.Where(x => x.No1 == id).Select(x => new EventsListViewModel
                 {
+                    Number = x.No1,
+                    GameAutono = x.GameAutono,
                     Class = x.Class,
                     Event = x.Event,
                     GameGroup = x.GameGroup,
                     GameStage = x.GameStage,
                     Status = x.Status,
+                    TluGameStatus = x.TlugameStatus,
                     GameDate = x.GameDate,
                     BeginTime = x.BeginTime,
                     RaceMeasure = x.RaceMeasure,
